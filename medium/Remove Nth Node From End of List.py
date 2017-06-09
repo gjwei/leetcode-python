@@ -17,14 +17,16 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        left, right = head, head
-        while n:
+        new_head = ListNode(0)
+        new_head.next = head
+        left, right = new_head, new_head
+        while n + 1:
             right = right.next
             n -= 1
         while right:
             right = right.next
             left = left.next
         left.next = left.next.next
-        return head
+        return new_head.next
 
     

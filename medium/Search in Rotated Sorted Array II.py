@@ -17,6 +17,7 @@ class Solution(object):
             return False
         split_index = 0
         left, right = 0, len(nums) - 1
+        
 
 
     
