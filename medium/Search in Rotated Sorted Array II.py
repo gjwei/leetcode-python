@@ -15,8 +15,26 @@ class Solution(object):
         """
         if len(nums) == 0:
             return False
-        split_index = 0
         left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            print mid
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                if nums[left] > target:
+                    left = mid + 1
+                else:
+                    right = mid
+            else:
+                if nums[left] > target:
+                    left = mid + 1
+                else:
+                    right = mid
+        return -1
+s = Solution()
+a = [4,5,6,7,0,1,2]
+print s.search(a, 2)
         
 
 

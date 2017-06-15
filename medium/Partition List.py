@@ -11,11 +11,18 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        new_head = ListNOde(x - 1)
-        p = new_head
-        while p and p.next:
-            if p.next.val < x:
+        left_list = ListNode(0)
+        right_list = ListNode(0)
+        p, q = left_list, right_list
+        while head:
+            if head.val < x:
+                p.next = head
                 p = p.next
             else:
-                p.next = p.next.next
+                q.next = head
+                q = q.next
+            head = head.next
+        q.next = None
+        p.next = right_list.next
+        return left_list.next
         

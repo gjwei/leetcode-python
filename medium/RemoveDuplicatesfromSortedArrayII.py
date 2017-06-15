@@ -12,10 +12,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        """
-        inorder:中序遍历
-        postorder： 后序遍历
-        """
+        
 
 
 

@@ -13,15 +13,20 @@ class Solution(object):
         :rtype: List[str]
         """
         result = []
-        self.backtrack(result, [], 0, 0, n)
+        self.backtrace(result, [], 0, 0, n)
         return result
-
-    def backtrack(self, result, s, open, close, n):
-        if len(s) == n * 2:
-            result.append(''.join(s))
-        if open < n:
-            self.backtrack(result, s, open + 1, close, n)
+        
+    def backtrace(self, result, parentheses, open, close, max):
+        if len(parentheses) == 2 * max:
+            result.append(''.join(parentheses))
+        if open < max:
+            parentheses.append('(')
+            self.backtrace(result, parentheses, open + 1, close, max)
+            parentheses.pop()
         if close < open:
-            self.backtrack(result, s, open, close + 1, n)
+            parentheses.append(')')
+            self.backtrace(result, parentheses, open, close + 1, max)
+            parentheses.pop()
 
-    
+s = Solution()
+print s.generateParenthesis(3)    

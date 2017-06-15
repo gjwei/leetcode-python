@@ -3,8 +3,7 @@ class Solution(object):
         """
         :type points: List[List[int]]
         :rtype: int
-        """
-       
+        """  
         result = 0
         for i in xrange(len(points)):
             d = dict()
@@ -13,7 +12,6 @@ class Solution(object):
                     continue
                 distance = self.get_distance(points[i], points[j])
                 d[distance] = d.get(distance, 0) + 1
-
             for _, value in d.iteritems():
                 result += (value) * (value - 1)
         return result
