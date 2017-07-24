@@ -1,0 +1,11 @@
+<xsd:element name="compensateEventDefinition" type="tCompensateEventDefinition" substitutionGroup="event-
+
+Definition"/> <xsd:complexType name="tCompensateEventDefinition"> <xsd:complexContent>
+
+<xsd:extension base="tEventDefinition">
+
+<xsd:attribute name="waitForCompletion" type="xsd:boolean"/> <xsd:attribute name="activityRef" type="xsd:QName"/>
+
+</xsd:extension>
+
+</xsd:complexContent> </xsd:complexType>

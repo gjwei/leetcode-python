@@ -18,8 +18,22 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        if not root:
+            return [[]]
+        stack1, stack2 = [root], []
         result = []
-        temp_node = [root]
-        while temp_node:
+        while stack1:       
             l = []
-            
+            while stack1:
+                p = stack1.pop()
+                l.append(p.val)
+                if not p.left:
+                    stack2.append(p.left)
+                if not p.right:
+                    stack2.append(p.right)
+            result.append(l)
+            stack1, stack2 = stack2, stack1
+        return result
+
+                        
+

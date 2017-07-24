@@ -12,16 +12,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        help_list = [0 for i in xrange(32)]
-        for num in nums:
-            for j in xrange(32):
-                help_list[j] += (num >>  j & 1)
-
-        for i in xrange(32):
-            help_list[i] %= 3
-        s = ''.join([str(i) for i in help_list[::-1]])
-        print help_list
-        return int(s, 2)
+        ones, twos = 0, 0
+        common_bit_mask = 0
+        for i in xrange(len(nums)):
+            twos |= (ones & nums[i])
+            ones ^= nums[i]
+            common_bit_mask = ~(ones & twos)
+            ones &= common_bit_mask
+            twos &= common_bit_mask
+        return ones
 
 s = Solution()
 print s.singleNumber([-2,-2,1,1,-3,1,-3,-3,-4,-2])
