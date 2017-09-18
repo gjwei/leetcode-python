@@ -14,27 +14,32 @@ class Solution(object):
         :rtype: TreeNode
         """
         d = {}
-    
-    def _lca(self, root, p, q, d):
+        _ = self._lca(root, p, q, d)
+        queue = [root]
+        while queue:
+            p = queue.pop(0)
+            left = d[p] or d[p.left]
+            right = d[p.right]
+            if left and right:
+                return p
+            elif left and p.left:
+                queue.append(p.left)
+            elif right and p.right:
+                queue.append(p.right)
+        return None
         
     
-    def find_node(root, p, q):
+    def _lca(self, root, p, q, d):
         if not root:
             return False
-        if root.val == p or root.val == q:
+        if root in d:
+            return d[root]
+        if root == p or root == q:
+            d[root] = True
             return True
-        left = self.find_node(root.left, p, q)
-        right = self.find_node(root.right, p, q)
-        return left and right
-        # if not root:
-        #     return False
-        # if root in d:
-        #     return d[root]
-        # if root.val == p or root.val == q:
-        #     d[root] = True
-        #     return True
-        # left = self._lca(root.left, p, q, d)
-        # right = self._lca(root.right, p, q, d)
-        # result = left and right
-        # d[root] = result
-        # return result
+        result = self._lca(root.left, p, q, d) or self._lca(root.right, p, q, d)
+        d[root] = result
+        return result
+        
+    
+    

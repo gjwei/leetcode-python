@@ -1,0 +1,14 @@
+
+Represent 2-3 tree as a BST
+
+use internal left-leaning links as "glue" for 3-nodes
+
+Red-black BST such that:
+1. 没有节点有两个红色连接
+2. 每个路径都有相同的黑色连接(完美的黑色平衡）
+3. 红色连接全在左边
+
+
+
+
+

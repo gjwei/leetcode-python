@@ -14,6 +14,10 @@ class Solution(object):
         """
         ##将由死亡复活的细胞设置为0-->2
         ##将要死亡的细胞设置为1 --> -1
+        
+        
+        
+        
         for i in xrange(len(board)):
             for j in xrange(len(board[0])):
                 neighbors = self.calculate_neighbor(board, i, j)
@@ -34,7 +38,7 @@ class Solution(object):
         result = 0
         for x in [i - 1, i, i + 1]:
             for y in [j - 1, j, j + 1]:
-                if x != i and y != j:
+                if x != i or y != j:
                     result += self.cell_live_or_dead(a, x, y)
         return result
 

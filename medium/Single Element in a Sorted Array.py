@@ -5,38 +5,28 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        left, right = 0, len(nums) - 1
+        left, right = 0, len(nums) >> 1
         while left < right:
-            mid = (left + right) // 2
-            if nums[mid] != nums[mid - 1] and nums[mid] != nums[mid + 1]:
-                return mid
-            if (mid - left + 1) & 1 == 0:
-                if nums[mid] == nums[mid + 1]: #in left
-                    right = mid - 1
-                else:
-                    left = mid + 1
+            mid = (left + right) >> 1
+            if nums[mid * 2] != nums[mid * 2 + 1]:
+                right = mid
             else:
-                if nums[mid] == nums[mid + 1]:
-                    left = mid
-                else:
-                    right = mid
-
-            return nums[right]
+                left = mid + 1
+        # left, right = 0, len(nums) - 1
+        # while left < right:
+        #     print left, right
+        #     mid = (left + right) >> 1
+        #     if nums[mid] == nums[mid + 1]:
+        #         mid -= 1
+        #     left_count = mid - left + 1
+        #     if left_count & 1 == 0:
+        #         left = mid + 1
+        #     else:
+        #         right = mid
+        # return nums[left]
+        #
                 
-        # if len(nums) == 1:
-        #     return nums[0]
-        # if nums[0] != nums[1]:
-        #     return nums[0]
-        # if nums[-1] != nums[-2]:
-        #     return nums[-1]
-        # mid = len(nums) >> 1
-        # if nums[mid] != nums[mid - 1] and nums[mid] != nums[mid + 1]:
-        #     return nums[mid]
-        # elif mid & 1 == 1 and nums[mid] == nums[mid - 1]:
-        #     return self.singleNonDuplicate(nums[mid + 1:])
-        # elif mid & 1 == 1 and num[mid] != nums[mid - 1]:
-        #     pass
 s = Solution()
 
-a = [1, 1, 3, 3, 2,  5, 5]
+a = [3,3,7,7,10,11,11]
 print s.singleNonDuplicate(a)

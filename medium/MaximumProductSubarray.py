@@ -25,6 +25,6 @@ class Solution(object):
 
 a = [-2, 3, -2, 4, -5]
 s = Solution()
-print s.maxProduct(a)
+print(s.maxProduct(a))
 
     

@@ -5,46 +5,56 @@ class Solution(object):
         :type click: List[int]
         :rtype: List[List[str]]
         """
-        [r, c] = click
-        if r < 0 or c < 0 or r >= len(board) or c >= len(board[r]):
+        r, c = click
+        self._update(board, r, c)
+        return board
+    
+    def _update(self, board, r, c):
+        if r < 0 or r >= len(board) or c < 0 or c >= len(board[r]):
             return
         if board[r][c] == 'M':
             board[r][c] = 'X'
             return
         elif board[r][c] == 'E':
-            _count_adjacent_mines = self.count_adjacent_mines(board, r, c)
-            if _count_adjacent_mines == 0:
+            count = self.calculate(board, r, c)
+            if count == 0:
                 board[r][c] = 'B'
-                if r - 1>= 0:
-                    self.updateBoard(board, [r - 1, c])
-                if r + 1 < len(board):
-                    self.updateBoard(board, [r + 1, c])
-                if c - 1 >= 0:
-                    self.updateBoard(board, [r, c - 1])
-                if  c + 1 < len(board[r]):
-                    self.updateBoard(board, [r, c + 1])
+                for i in xrange(r-1, r+2):
+                    for j in xrange(c-1, c+2):
+                        self._update(board, i, j)
+                # self._update(board, r - 1, c)
+                # self._update(board, r + 1, c)
+                # self._update(board, r, c + 1)
+                # self._update(board, r, c - 1)
                 return
             else:
-                board[r][c] = str(_count_adjacent_mines)
+                board[r][c] = str(count)
                 return
-        
-        
-    def count_adjacent_mines(self, board, x, y):
-        result = 0 
-        for i in xrange(x - 1, x + 2):
-            for j in xrange( y - 1, y + 2):
-                if 0 <= i < len(board) and 0 <= j < len(board[i]):
-                    result += (board[i][j] == 'M')
+        return
+            
+    
+    def calculate(self, board, r, c):
+        result = 0
+        for i in xrange(r - 1, r + 2):
+            for j in xrange(c - 1, c + 2):
+                if i >= 0 and i < len(board) and j >= 0 and j < len(board[r]):
+                    result += (board[i][j] == 'M' or board[i][j] == 'X')
         return result
+                
+            
+         
                 
 s = Solution()
 a = ["EEEEEEEE","EEEEEEEM","EEMEEEEE","MEEEEEEE","EEEEEEEE","EEEEEEEE","EEEEEEEE","EEMMEEEE"]
 for i in range(len(a)):
     a[i] = list(a[i])
-    print a[i]
+#
+#  r = s.updateBoard(board, ())
+# a = [['B', '1', 'E', '1', 'B'],
+#  ['B', '1', 'M', '1', 'B'],
+#  ['B', '1', '1', '1', 'B'],
+#  ['B', 'B', 'B', 'B', 'B']]
 
-print s.count_adjacent_mines(a, 2, 1)
-s.updateBoard(a, [0, 0])
-print ''
-for i in a:
+r = s.updateBoard(a, (0, 0))
+for i in r:
     print i
